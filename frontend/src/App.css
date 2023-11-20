@@ -1,0 +1,33 @@
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.main {
+  background: #303030;
+}
+
+.title {
+  min-height: 25vh;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding-top: 30px;
+  padding-left: 60px;
+  font-size: calc(80px + 2vmin);
+  color: white;
+}
+
+.content {
+  background: #ffffff;
+  text-align: center;
+  margin: 10px 100px;
+  padding: 10px;
+  color: #000000;
+}
+
+.foot {
+  margin-top: 20px;
+}
