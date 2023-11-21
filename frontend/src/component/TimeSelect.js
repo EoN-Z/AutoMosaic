@@ -1,6 +1,6 @@
 import './Component.css';
 import Spinner from '../assets/Spinner.gif';
-import React, {useRef} from 'react';
+import React from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ export default function TimeSelect({facenum, setFacenum}) {
   const url = 'http://localhost:8000';
   const navigate = useNavigate();
 
-  const inputvideo = useRef(null);
+  const inputvideo = React.useRef(null);
   const [times, setTimes] = React.useState(new Set());
   const [loading, setLoading] = React.useState(false);
 
