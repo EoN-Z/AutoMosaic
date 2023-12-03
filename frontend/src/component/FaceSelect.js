@@ -42,24 +42,25 @@ export default function FaceSelect({facenum}) {
         : 
         <>
           <h1>모자이크 대상에서 제외할 얼굴을 선택해주세요.</h1>
-          <br/>
-          <table>
-            <thead>
-              <tr>
-                <th>얼굴 선택</th>
-              </tr>
-            </thead>
-            <tbody>
-              {imgselect.map((val, idx) => (
-                <tr key={idx}>
-                  <td>{idx+1}</td>
-                  <td><img src={url+"/media/faces/"+idx+".png"} style={{'maxWidth': '50%', 'height': 'auto'}} /></td>
-                  <td><input type="checkbox" onChange={() => toggleSelect(idx)} /></td>
+          <div className="facewrap">
+            <table className="facetable">
+              <thead>
+                <tr>
+                  <th colSpan="2">얼굴 선택</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <button className="button" onClick={() => faceUpload()}><span>선택 완료</span></button>
+              </thead>
+              <tbody>
+                {imgselect.map((val, idx) => (
+                  <tr key={idx}>
+                    <td><img src={url+"/media/faces/"+idx+".png"} style={{'maxHeight': '100px', 'width': 'auto'}} /></td>
+                    <td><input type="checkbox" style={{zoom:2.0}} onChange={() => toggleSelect(idx)} /></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <br/>
+            <button className="button" onClick={() => faceUpload()}><span>선택 완료</span></button>
+          </div>
         </>
       }
     </>

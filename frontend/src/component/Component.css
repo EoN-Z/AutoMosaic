@@ -29,7 +29,7 @@
   font-weight: 700;
   font-size: 15px;
   background-color: #222;
-  padding: 10px 50px;
+  padding: 10px 45px;
   margin: 0 auto;
   box-shadow: 0 5px 15px rgba(0,0,0,0.20);
 }
@@ -86,5 +86,94 @@
   vertical-align: top;
 }
 .timelist {
+  font-size: 15px;
   padding: 0px 20px 0px 20px;
 }
+
+.timetable {
+  font-size: 14px;
+  text-align: center;
+  border-collapse: collapse;
+  width: 200px;
+}
+.timetable thead {
+  font-size: 15px;
+  text-align: center;
+  height: 20px;
+  background-color: #222;
+  color: white;
+}
+.timetable tr:nth-child(even) {
+  background-color: #f4f4f4;
+}
+
+.delbutton {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: #575757;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 150ms;
+  .icon-cross {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    position: relative;
+    width: 15px;
+    height: 15px;
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 0px;
+      right: 0;
+      height: 3px;
+      background: #ffffff;
+      border-radius: 3px;
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+    span {
+      display: block;
+    }
+  }
+  &:hover,
+  &:focus {
+    transform: rotateZ(90deg);
+    background: #da3a3a;
+  }
+}
+
+.facewrap {
+  display: inline-block;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.facetable {
+  font-size: 14px;
+  text-align: center;
+  border-collapse: collapse;
+  width: 200px;
+}
+.facetable thead {
+  font-size: 15px;
+  text-align: center;
+  height: 30px;
+  background-color: #222;
+  color: white;
+}
+

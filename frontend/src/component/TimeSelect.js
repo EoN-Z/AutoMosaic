@@ -61,18 +61,18 @@ export default function TimeSelect({facenum, setFacenum}) {
               <button className="button" onClick={() => timeAdd()}><span>시간 추가</span></button>
             </div>
             <div className="timebox timelist">
-              <table>
+              <table className="timetable">
                 <thead>
                   <tr>
-                    <th>선택된 시간</th>
+                    <th colSpan="3">선택된 시간</th>
                   </tr>
                 </thead>
                 <tbody>
                   {Array.from(times).map((time, idx) => (
                     <tr key={idx}>
                       <td>{idx+1}</td>
-                      <td>{time.toFixed(2)}</td>
-                      <td><button className="delbutton" onClick={() => timeDelete(time)}>삭제</button></td>
+                      <td>{(time/3600).toFixed().padStart(2,'0')} : {(time/60).toFixed().padStart(2,'0')} : {(time%60).toFixed(2).padStart(5,'0')}</td>
+                      <td><button className="delbutton" onClick={() => timeDelete(time)}><span className="icon-cross"></span></button></td>
                     </tr>
                   ))}
                 </tbody>
