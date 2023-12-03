@@ -1,14 +1,11 @@
-import time, os
+import time
 from deepface import DeepFace
 import cv2
 from retinaface import RetinaFace
 
-test_flag = True
-
-media_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'media')
-input_video_url = media_dir + "input.mp4"
-output_video_url = media_dir + "output.mp4"
-faces_directory_path = media_dir + "faces/"
+input_video_url = "/home/chanwoo4267/web-automosaic/backend/media/input.mp4"
+output_video_url = "/home/chanwoo4267/web-automosaic/backend/media/output.avi"
+faces_directory_path = "/home/chanwoo4267/web-automosaic/backend/media/faces/"
 
 detected_face_list = list()
 
@@ -20,7 +17,6 @@ def detect_by_time(cap, given_time):
     if (current_frame >= total_frames):
         return False, None
     return True, current_frame - 1
-
 
 def capture_frame_faces(times):
     idx = 0
@@ -47,16 +43,10 @@ def capture_frame_faces(times):
     
     return True, result_list
 
-
 def facelist(times):
-    if test_flag:
-        time.sleep(1)
-        return 5
-    
     global detected_face_list
     result, detected_face_list = capture_frame_faces(times)
     return len(detected_face_list)
-
 
 def mosaic_video(bool_faces):
     global detected_face_list
@@ -67,7 +57,7 @@ def mosaic_video(bool_faces):
     frame_height = int(cap.get(4))  # Height of the frames in the video
     fps = cap.get(cv2.CAP_PROP_FPS)
 
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
     out = cv2.VideoWriter(output_video_url, fourcc, fps, (frame_width, frame_height)) # save video
 
     search_faces = list()
@@ -123,11 +113,6 @@ def mosaic_video(bool_faces):
     out.release()
     return True
 
-
 def domosaic(faces):
-    if test_flag:
-        time.sleep(1)
-        return
-    
     print(faces)
     result = mosaic_video(faces)
