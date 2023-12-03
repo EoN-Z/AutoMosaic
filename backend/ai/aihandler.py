@@ -3,6 +3,8 @@ from deepface import DeepFace
 import cv2
 from retinaface import RetinaFace
 
+test_flag = True
+
 input_video_url = "/home/chanwoo4267/web-automosaic/backend/media/input.mp4"
 output_video_url = "/home/chanwoo4267/web-automosaic/backend/media/output.avi"
 faces_directory_path = "/home/chanwoo4267/web-automosaic/backend/media/faces/"
@@ -17,6 +19,7 @@ def detect_by_time(cap, given_time):
     if (current_frame >= total_frames):
         return False, None
     return True, current_frame - 1
+
 
 def capture_frame_faces(times):
     idx = 0
@@ -43,10 +46,16 @@ def capture_frame_faces(times):
     
     return True, result_list
 
+
 def facelist(times):
+    if test_flag:
+        time.sleep(1)
+        return 5
+    
     global detected_face_list
     result, detected_face_list = capture_frame_faces(times)
     return len(detected_face_list)
+
 
 def mosaic_video(bool_faces):
     global detected_face_list
@@ -113,6 +122,11 @@ def mosaic_video(bool_faces):
     out.release()
     return True
 
+
 def domosaic(faces):
+    if test_flag:
+        time.sleep(1)
+        return
+    
     print(faces)
     result = mosaic_video(faces)
