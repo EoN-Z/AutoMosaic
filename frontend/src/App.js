@@ -21,10 +21,14 @@ function App() {
 
   return (
     <Router>
-      <div className="main">
+      <div className="container">
         <div className="title">
           AutoMosaic
         </div>
+        <div className="subtitle">
+          초상권 보호의 새로운 솔루션
+        </div>
+        <div className="line"></div>
         <div className="content">
           <Routes>
             <Route path="/" element={<VideoUpload />}/>
@@ -32,9 +36,6 @@ function App() {
             <Route path="/face" element={<FaceSelect facenum={facenum} />}/>
             <Route path="/download" element={<VideoDownload />}/>
           </Routes>
-        </div>
-        <div className="foot">
-          <br/>
         </div>
       </div>
     </Router>

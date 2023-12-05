@@ -52,14 +52,14 @@ export default function VideoUpload() {
       {loading ?
         <>
           <h1>영상 업로드 중...</h1>
-          <img src={Spinner} alt="작업 중..." width="10%"/>
+          <img src={Spinner} width="10%"/>
           <br/>
           <progress className="progress" value={uploadProgress} max="100"></progress>
         </>
         : 
         <>
           <h1>모자이크할 영상을 선택해주세요</h1>
-          <input className="select" type="file" name="file" accept="video/mp4" onChange={fileSelect}></input>
+          <input className="select" type="file" accept="video/mp4" onChange={fileSelect}></input>
           <br/>
           <button className="button" onClick={() => fileUpload()}><span>업로드</span></button>
         </>

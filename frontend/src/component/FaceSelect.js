@@ -37,30 +37,57 @@ export default function FaceSelect({facenum}) {
       {loading ?
         <>
           <h1>모자이크 처리 중...</h1>
-          <img src={Spinner} alt="작업 중..." width="10%"/>
+          <img src={Spinner} width="10%"/>
         </>
         : 
         <>
-          <h1>모자이크 대상에서 제외할 얼굴을 선택해주세요.</h1>
+          <h1>모자이크 대상에서 제외할 얼굴을 선택해주세요</h1>
           <div className="facewrap">
             <table className="facetable">
               <thead>
                 <tr>
-                  <th colSpan="2">얼굴 선택</th>
+                  <th colSpan="5"></th>
                 </tr>
               </thead>
               <tbody>
-                {imgselect.map((val, idx) => (
-                  <tr key={idx}>
-                    <td><img src={url+"/media/faces/"+idx+".png"} style={{'maxHeight': '100px', 'width': 'auto'}} /></td>
-                    <td><input type="checkbox" style={{zoom:2.0}} onChange={() => toggleSelect(idx)} /></td>
+                {Array(Math.ceil(facenum/5)).fill().map((_, row) => (
+                  <tr key={row}>
+                    {Array(5).fill().map((_, col) => {
+                      const idx = row*5 + col;
+                      if(idx < facenum) {
+                        return (
+                          <td key={idx}>
+                            <input type="checkbox" id={"check"+idx} onChange={() => toggleSelect(idx)} />
+                            <label htmlFor={"check"+idx}>
+                              <img src={url+"/media/faces/"+idx+".png"} />
+                            </label>
+                          </td>
+                        );
+                      }
+                    })}
                   </tr>
                 ))}
+                {facenum == 0 ? 
+                    <tr>
+                      <td></td>
+                      <td width="150px">
+                        <label>
+                          식별된 얼굴이 없습니다
+                        </label>
+                        <br/>
+                        <br/>
+                      </td>
+                      <td></td>
+                    </tr>
+                  :
+                    <></>
+                }
               </tbody>
             </table>
-            <br/>
-            <button className="button" onClick={() => faceUpload()}><span>선택 완료</span></button>
           </div>
+          <br/>
+          <br/>
+          <button className="button" onClick={() => faceUpload()}><span>선택 완료</span></button>
         </>
       }
     </>

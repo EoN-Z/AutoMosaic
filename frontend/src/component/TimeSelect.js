@@ -47,19 +47,16 @@ export default function TimeSelect({facenum, setFacenum}) {
       {loading ?
         <>
           <h1>얼굴 식별 중...</h1>
-          <img src={Spinner} alt="작업 중..." width="10%"/>
+          <img src={Spinner} width="10%"/>
         </>
         : 
         <>
-          <h1>모자이크 대상에서 제외할 얼굴이 있는 시간을 입력해주세요</h1>
+          <h1>모자이크 대상에서 제외할 얼굴이 있는 장면의 시간을 선택해주세요</h1>
           <video ref={inputvideo} width="480" height="320" controls onLoadedMetadata={() => {inputvideo.current.currentTime = 0}}>
             <source src={url+"/media/input.mp4"} type="video/mp4" />
           </video>
           <br/><br/>
           <div className="timewrap">
-            <div className="timebox">
-              <button className="button" onClick={() => timeAdd()}><span>시간 추가</span></button>
-            </div>
             <div className="timebox timelist">
               <table className="timetable">
                 <thead>
@@ -70,16 +67,18 @@ export default function TimeSelect({facenum, setFacenum}) {
                 <tbody>
                   {Array.from(times).map((time, idx) => (
                     <tr key={idx}>
-                      <td>{idx+1}</td>
-                      <td>{(time/3600).toFixed().padStart(2,'0')} : {(time/60).toFixed().padStart(2,'0')} : {(time%60).toFixed(2).padStart(5,'0')}</td>
-                      <td><button className="delbutton" onClick={() => timeDelete(time)}><span className="icon-cross"></span></button></td>
+                      <td width="15px">{idx+1}</td>
+                      <td>{(time/60).toFixed().padStart(2,'0')}:{(time%60).toFixed(2).padStart(5,'0')}</td>
+                      <td width="25px"><button className="delbutton" onClick={() => timeDelete(time)}><span className="icon-cross"></span></button></td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
             <div className="timebox">
-              <button className="button" onClick={() => timeUpload()}><span>선택 완료</span></button>
+              <button className="button timebtn" onClick={() => timeAdd()}><span>시간 추가</span></button>
+              <br/><br/>
+              <button className="button timebtn" onClick={() => timeUpload()}><span>선택 완료</span></button>
             </div>
           </div>
         </>

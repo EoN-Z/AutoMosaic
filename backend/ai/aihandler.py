@@ -50,7 +50,7 @@ def capture_frame_faces(times):
 def facelist(times):
     if test_flag:
         time.sleep(1)
-        return 5
+        return 7
     
     global detected_face_list
     result, detected_face_list = capture_frame_faces(times)
