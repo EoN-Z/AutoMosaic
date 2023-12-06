@@ -59,8 +59,11 @@ export default function VideoUpload() {
         : 
         <>
           <h1>모자이크할 영상을 선택해주세요</h1>
-          <input className="select" type="file" accept="video/mp4" onChange={fileSelect}></input>
-          <br/>
+          <br/><br/>
+          <input id="fileselect" type="file" accept="video/mp4" onChange={fileSelect}></input>
+          <label htmlFor="fileselect">
+            <div className="select">{!file ? "파일 선택" : file.name}</div>
+          </label>
           <button className="button" onClick={() => fileUpload()}><span>업로드</span></button>
         </>
       }

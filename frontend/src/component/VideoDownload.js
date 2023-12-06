@@ -14,7 +14,7 @@ export default function VideoDownload() {
       const href = window.URL.createObjectURL(response.data);
       const link = document.createElement('a');
       link.href = href;
-      link.setAttribute('download', "output.mp4");
+      link.setAttribute('download', "output.avi");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

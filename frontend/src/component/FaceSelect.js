@@ -58,7 +58,7 @@ export default function FaceSelect({facenum}) {
                         return (
                           <td key={idx}>
                             <input type="checkbox" id={"check"+idx} onChange={() => toggleSelect(idx)} />
-                            <label htmlFor={"check"+idx}>
+                            <label className="facecheck" htmlFor={"check"+idx}>
                               <img src={url+"/media/faces/"+idx+".png"} />
                             </label>
                           </td>
