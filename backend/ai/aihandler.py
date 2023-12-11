@@ -3,11 +3,11 @@ from deepface import DeepFace
 import cv2
 from retinaface import RetinaFace
 
-test_flag = True
+test_flag = False
 
-input_video_url = "/home/chanwoo4267/web-automosaic/backend/media/input.mp4"
-output_video_url = "/home/chanwoo4267/web-automosaic/backend/media/output.avi"
-faces_directory_path = "/home/chanwoo4267/web-automosaic/backend/media/faces/"
+input_video_url = "/home/chanwoo4267/AutoMosaic/backend/media/input.mp4"
+output_video_url = "/home/chanwoo4267/AutoMosaic/backend/media/output.avi"
+faces_directory_path = "/home/chanwoo4267/AutoMosaic/backend/media/faces/"
 
 detected_face_list = list()
 
@@ -60,6 +60,7 @@ def facelist(times):
 def mosaic_video(bool_faces):
     global detected_face_list
     cap = cv2.VideoCapture(input_video_url)
+
     v = 50 # mosaic size
 
     frame_width = int(cap.get(3))  # Width of the frames in the video
@@ -83,16 +84,20 @@ def mosaic_video(bool_faces):
     
     #debug
     print("search_faces : ", len(search_faces))
+
+    cur_frame = 0
+    tot_frame = cap.get(cv2.CAP_PROP_FRAME_COUNT)
     
     while(True):
         ret, frame = cap.read()
         if not ret: # if video is over
             break
 
+        print(cur_frame, "/", tot_frame)
+        cur_frame += 1
+
         faces = RetinaFace.detect_faces(frame)
         for i in range(len(faces)):
-            # debug
-            print("current face : ", i)
 
             temp_str = 'face_' + str(i+1)
             startX = faces[temp_str]['facial_area'][0]
@@ -112,7 +117,14 @@ def mosaic_video(bool_faces):
             if (unmosaic_flag == False) :
                 # mosaic
                 roi_f = frame[startY:endY, startX:endX]
-                roi = cv2.resize(roi_f, (roi_f.shape[1] // v, roi_f.shape[0] // v))
+
+                # error handling
+                new_width = max(1, roi_f.shape[1] // v)
+                new_height = max(1, roi_f.shape[0] // v)
+                if new_width == 1 and new_height == 1:
+                    print("detection error occured")
+                roi = cv2.resize(roi_f, (new_width, new_height))
+
                 roi = cv2.resize(roi, (roi_f.shape[1], roi_f.shape[0]), interpolation=cv2.INTER_AREA)
                 frame[startY:endY, startX:endX] = roi
         
